@@ -4,6 +4,8 @@ ENV JAVA_VERSION            8.171.11-r0
 ENV SBT_VERSION             1.2.3
 ENV DOCKER_COMPOSE_VERSION  1.22.0
 
+COPY entrypoint.sh /usr/local/bin/
+
 RUN set -eux; \
     apk update; \
     apk add --no-cache bash ca-certificates wget openjdk8=${JAVA_VERSION}; \
@@ -16,6 +18,9 @@ RUN set -eux; \
     chmod +x /usr/local/bin/docker-compose; \
     wget -q -O /tmp/sbt.tgz "https://piccolo.link/sbt-${SBT_VERSION}.tgz"; \
     mkdir -p /opt; \
-    tar -xzvf /tmp/sbt.tgz --directory=/opt;
+    tar -xzvf /tmp/sbt.tgz --directory=/opt; \
+    chmod +x /usr/local/bin/entrypoint.sh;
 
 ENV PATH $PATH:/opt/sbt/bin
+
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
