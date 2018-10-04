@@ -1,8 +1,12 @@
 FROM docker:18.06.1-ce-dind
 
 ENV JAVA_VERSION            8.171.11-r0
+ENV JAVA_HOME               /usr/lib/jvm/java-1.8-openjdk
 ENV SBT_VERSION             1.2.3
+ENV SBT_HOME                /opt/sbt
 ENV DOCKER_COMPOSE_VERSION  1.22.0
+
+ENV PATH ${PATH}:${JAVA_HOME}/bin:${SBT_HOME}/bin
 
 COPY entrypoint.sh /usr/local/bin/
 
@@ -17,10 +21,12 @@ RUN set -eux; \
     wget -q -O /usr/local/bin/docker-compose "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`"; \
     chmod +x /usr/local/bin/docker-compose; \
     wget -q -O /tmp/sbt.tgz "https://piccolo.link/sbt-${SBT_VERSION}.tgz"; \
-    mkdir -p /opt; \
-    tar -xzvf /tmp/sbt.tgz --directory=/opt; \
-    chmod +x /usr/local/bin/entrypoint.sh;
-
-ENV PATH $PATH:/opt/sbt/bin
+    mkdir -p "${SBT_HOME}"; \
+    tar -xzvf /tmp/sbt.tgz --directory="${SBT_HOME}/../"; \
+    chmod +x /usr/local/bin/entrypoint.sh; \
+    docker-compose --version; \
+    java  -version; \
+    javac -version; \
+    sbt sbtVersion;
 
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
