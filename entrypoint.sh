@@ -1,7 +1,5 @@
 #!/bin/bash
 
-/usr/local/bin/dockerd-entrypoint.sh &
-
-echo "exec \"$@\""
+/usr/local/bin/dockerd-entrypoint.sh > /dev/null &
 
 exec "$@"
