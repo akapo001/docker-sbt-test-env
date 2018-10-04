@@ -2,6 +2,6 @@
 
 /usr/local/bin/dockerd-entrypoint.sh &
 
-echo "exec $@"
+echo "exec \"$@\""
 
-exec $@
+exec "$@"
