@@ -21,9 +21,9 @@ RUN set -eux; \
     yum install -y docker-ce docker-ce-cli containerd.io; \
     mkdir --parents "${JAVA_HOME}" "${SBT_HOME}" /tmp/setup ;\
     curl --output /tmp/setup/openjdk.tar.gz --silent --show-error --location "${JAVA_DIST_URL}"; \
-    tar -xvf /tmp/setup/openjdk.tar.gz --directory="${JAVA_HOME}" --strip=1 ;\
+    tar -xf /tmp/setup/openjdk.tar.gz --directory="${JAVA_HOME}" --strip=1 ;\
     curl --output /tmp/setup/sbt.tgz --silent --show-error --location "${SBT_DIST_URL}"; \
-    tar -xvf /tmp/setup/sbt.tgz --directory="${SBT_HOME}" --strip=1 ;\
+    tar -xf /tmp/setup/sbt.tgz --directory="${SBT_HOME}" --strip=1 ;\
     curl --output /usr/local/bin/docker-compose --silent --show-error --location "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m`"; \
     chmod +x /usr/local/bin/docker-compose; \
     curl --output /usr/local/bin/dind --silent --show-error --location "https://raw.githubusercontent.com/docker/docker/${DIND_COMMIT}/hack/dind"; \
