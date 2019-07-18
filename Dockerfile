@@ -13,8 +13,6 @@ ENV JAVA_HOME               /opt/java-1.8-openjdk
 ENV SBT_HOME                /opt/sbt
 ENV PATH                    ${PATH}:${JAVA_HOME}/bin:${SBT_HOME}/bin
 
-COPY entrypoint.sh /usr/local/bin/
-
 RUN set -eux; \
     yum install -y yum-utils device-mapper-persistent-data lvm2; \
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo; \
@@ -32,7 +30,6 @@ RUN set -eux; \
     chmod +x /usr/local/bin/dockerd-entrypoint.sh; \
     curl --output /usr/local/bin/modprobe --silent --show-error --location "https://raw.githubusercontent.com/docker-library/docker/${DOCKER_COMMIT}/modprobe.sh"; \
     chmod +x /usr/local/bin/modprobe; \
-    chmod +x /usr/local/bin/entrypoint.sh; \
     groupadd --system dockremap; \
     useradd  --system -g dockremap dockremap; \
     echo 'dockremap:165536:65536' >> /etc/subuid; \
@@ -48,6 +45,10 @@ RUN set -eux; \
     java  -version; \
     javac -version; \
     sbt sbtVersion;
+
+COPY entrypoint.sh /usr/local/bin/
+RUN set -eux; \
+    chmod +x /usr/local/bin/entrypoint.sh;
 
 VOLUME /var/lib/docker
 EXPOSE 2375
