@@ -2,6 +2,7 @@
 
 This image contains:
 
+- git
 - jdk8
 - sbt
 - docker-compose

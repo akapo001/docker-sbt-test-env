@@ -14,7 +14,7 @@ ENV SBT_HOME                /opt/sbt
 ENV PATH                    ${PATH}:${JAVA_HOME}/bin:${SBT_HOME}/bin
 
 RUN set -eux; \
-    yum install -y yum-utils device-mapper-persistent-data lvm2; \
+    yum install -y yum-utils device-mapper-persistent-data lvm2 git; \
     yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo; \
     yum install -y docker-ce docker-ce-cli containerd.io; \
     mkdir --parents "${JAVA_HOME}" "${SBT_HOME}" /tmp/setup ;\
