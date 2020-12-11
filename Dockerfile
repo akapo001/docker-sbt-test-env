@@ -1,6 +1,6 @@
 FROM centos:7
 
-ARG JAVA_DIST_URL="https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u212-b04/OpenJDK8U-jdk_x64_linux_hotspot_8u212b04.tar.gz"
+ARG JAVA_DIST_URL="https://github.com/AdoptOpenJDK/openjdk8-binaries/releases/download/jdk8u282-b04_openj9-0.24.0-m1/OpenJDK8U-jdk_x64_linux_openj9_8u282b04_openj9-0.24.0-m1.tar.gz"
 
 ARG SBT_DIST_URL="https://piccolo.link/sbt-1.2.8.tgz"
 
